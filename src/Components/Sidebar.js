@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import IconDashboard from ".././Assets/icon-sidebar/home-2.png";
 import IconEmployee from ".././Assets/icon-sidebar/profile-2user.png";
 import IconCalender from ".././Assets/icon-sidebar/calendar.png";
@@ -31,6 +31,7 @@ const iconData = [
 function Sidebar({ passingVal }) {
   const [side, setSide] = useState(false);
   const [data, setData] = useState([]);
+ 
 
   const handleClickSide = (val) => {
     if (val.title === "Organization") {
@@ -52,18 +53,40 @@ function Sidebar({ passingVal }) {
   };
 
   return (
-    <div className="flex">
-      <div className={`transition-all duration-200 ease-in bg-redColor w-24 h-screen ${!passingVal ? "opacity-0 invisible translate-x-[-20px]" : "opacity-1 visible translate-x-0"}`}>
-        {iconData.map((val) => {
-          return (
-            <div key={val.id} className="flex flex-col items-center justify-center p-6 cursor-pointer" onClick={() => handleClickSide(val)}>
-              <img src={val.iconTitle} className="w-8 h-8" alt={val.title} />
-              <p className="text-white text-sm cursor-pointer">{val.title}</p>
-            </div>
-          );
-        })}
-      </div>
-      <ChildSideBar passingval2={side} passingData={data} />
+    <div className={`absolute z-10 transition-all duration-200 ease-in bg-redColor w-24 h-screen ${
+      !passingVal
+        ? "opacity-0 invisible translate-x-[-20px]"
+        : "opacity-1 visible translate-x-0"
+    }`} >
+      {passingVal && (
+          <div
+            className={`absolute z-10 transition-all duration-200 ease-in bg-redColor w-24 h-screen ${
+              !passingVal
+                ? "opacity-0 invisible translate-x-[-20px]"
+                : "opacity-1 visible translate-x-0"
+            }`}
+          >
+            {iconData.map((val) => {
+              return (
+                <div
+                  key={val.id}
+                  className="flex flex-col items-center justify-center p-6 cursor-pointer"
+                  onClick={() => handleClickSide(val)}
+                >
+                  <img
+                    src={val.iconTitle}
+                    className="w-8 h-8"
+                    alt={val.title}
+                  />
+                  <p className="text-white text-sm cursor-pointer">
+                    {val.title}
+                  </p>
+                </div>
+              );
+            })}
+            <ChildSideBar passingval2={side} passingData={data} />
+          </div>
+      )}
     </div>
   );
 }

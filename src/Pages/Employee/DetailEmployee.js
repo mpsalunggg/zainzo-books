@@ -6,6 +6,7 @@ import { IoIosArrowForward } from "react-icons/io";
 import { RiUserLine } from "react-icons/ri";
 import Personal from "./general/Personal";
 import Employment from "./general/Employment";
+import Navbar from "../../Components/Navbar";
 
 class DetailEmployee extends Component {
   state = {
@@ -41,6 +42,8 @@ class DetailEmployee extends Component {
 
   render() {
     return (
+      <>
+      <Navbar />
       <div className="py-10 px-8 bg-gray-main min-h-screen">
         <div className="container mx-auto h-screen drop-shadow-md bg-white rounded-xl p-3 overflow-auto flex flex-row divide-x">
           <div className="w-60 min-w-60 flex flex-col items-center">
@@ -61,7 +64,7 @@ class DetailEmployee extends Component {
                         onClick={() => {
                           this.OpenMenu(index);
                         }}
-                      >
+                        >
                         <span className="flex font-medium gap-x-2 items-center">
                           <span className="">
                             <item.icon color="gray" />
@@ -76,13 +79,13 @@ class DetailEmployee extends Component {
                             {item.submenu.map((submenu, indexSub) => {
                               return (
                                 <li
-                                  className={`pl-6 
+                                className={`pl-6 
                                   hover:text-red-main font-thin ${this.state.switchMenuIndex === indexSub ? "text-red-main" : "text-gray-disabledText"}`}
                                   key={indexSub}
                                   onClick={() => {
                                     this.showPage(submenu.viewIndex);
                                   }}
-                                >
+                                  >
                                   {submenu.title}
                                 </li>
                               );
@@ -101,6 +104,7 @@ class DetailEmployee extends Component {
           </div>
         </div>
       </div>
+      </>
     );
   }
 }

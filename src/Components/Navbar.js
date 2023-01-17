@@ -14,7 +14,6 @@ function Navbar() {
     return open ? setOpen(false) : setOpen(true);
   };
   const handleClickSidebar = () => {
-    console.log(openSidebar);
     return openSidebar ? setOpenSidebar(false) : setOpenSidebar(true);
   };
 
