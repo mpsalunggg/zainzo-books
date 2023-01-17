@@ -18,8 +18,6 @@ function Navbar() {
     return openSidebar ? setOpenSidebar(false) : setOpenSidebar(true);
   };
 
-
-
   useEffect(() => {
     let handler = (e) => {
       if (!profileRef.current.contains(e.target)) {
@@ -38,16 +36,8 @@ function Navbar() {
       <div className="h-20 w-full bg-white shadow-md flex items-center justify-between p-8">
         <div className="flex items-center gap-10">
           {/* <img src={Hamburger} className="w-6" /> */}
-          <button
-            className="w-6 h-6 bg-cover bg-center bg-no-repeat"
-            style={{ backgroundImage: `url(${Hamburger})` }}
-            onClick={handleClickSidebar}
-          />
-          <input
-            type="text"
-            className="bg-custom outline-none rounded-full text-sm p-3 w-48 h-10"
-            placeholder="Search employee"
-          />
+          <button className="w-6 h-6 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: `url(${Hamburger})` }} onClick={handleClickSidebar} />
+          <input type="text" className="bg-custom outline-none rounded-full text-sm p-3 w-48 h-10" placeholder="Search employee" />
         </div>
         <img src={Zeinzo} className="w-28" />
         <div className="flex items-center">
@@ -68,13 +58,7 @@ function Navbar() {
               <div className="cursor-pointer" onClick={() => handleClick()}>
                 <div className="w-8 h-8 rounded-full bg-custom2" />
               </div>
-              <div
-                className={`absolute top-24 right-3 bg-white w-40 rounded-3xl p-4 transition-all duration-200 ease-in ${
-                  !open
-                    ? "opacity-0 invisible translate-y-[-20px]"
-                    : "opacity-1 visible translate-y-0"
-                }`}
-              >
+              <div className={`absolute top-24 right-3 bg-white w-40 rounded-3xl p-4 transition-all duration-200 ease-in ${!open ? "opacity-0 invisible translate-y-[-20px]" : "opacity-1 visible translate-y-0"}`}>
                 <ul className="text-custom flex flex-col justify-center gap-2">
                   <li>Account</li>
                   <li>Support</li>

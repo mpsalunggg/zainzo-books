@@ -1,17 +1,26 @@
-import React from 'react'
+import React from "react";
+import { useNavigate } from "react-router-dom";
 
-function ChildSideBar({passingval2, passingData}) {
+function ChildSideBar({ passingval2, passingData }) {
+  let navigate = useNavigate();
   return (
-    <div className={`transition-all duration-200 ease-in bg-white w-40 h-screen shadow-md p-4 ${!passingval2 ? 'opacity-0 invisible translate-x-[-20px]' : 'opacity-1 visible translate-x-0'}`}>
-        {
-            passingData.map((val,i) =>{
-                return <div key={i}>
-                    <h1 className='mb-4'>{val}</h1>
-                </div>
-            })
-        }
+    <div className={`transition-all duration-200 ease-in bg-white w-40 h-screen shadow-md p-4 ${!passingval2 ? "opacity-0 invisible translate-x-[-20px]" : "opacity-1 visible translate-x-0"}`}>
+      {passingData.map((val, i) => {
+        return (
+          <div key={i}>
+            <h1
+              className="mb-4 cursor-pointer"
+              onClick={() => {
+                navigate(val.path);
+              }}
+            >
+              {val.title}
+            </h1>
+          </div>
+        );
+      })}
     </div>
-  )
+  );
 }
 
-export default ChildSideBar
+export default ChildSideBar;
