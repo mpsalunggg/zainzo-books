@@ -62,7 +62,8 @@ function Employee() {
   return (
     <div>
       <Navbar />
-      <div className="p-8 bg-gray-main min-h-screen">
+      <Sidebar />
+      <div className="ml-24 p-8 bg-gray-main min-h-screen">
         <div className="mb-7 flex flex-row">
           <h1 className="text-xl mr-auto font-normal">Employee</h1>
           <button
@@ -73,7 +74,9 @@ function Employee() {
           >
             Export
           </button>
-          <button className="bg-red-main rounded-full text-white text-sm px-4 py-2 flex flex-row items-center justify-items-center">
+          <button className="bg-red-main rounded-full text-white text-sm px-4 py-2 flex flex-row items-center justify-items-center" onClick={() => {
+              navigate("/add-employee");
+            }}>
             <IoAddOutline color="#white" className="w-4 h-4 mr-2" />
             Add Employee
           </button>

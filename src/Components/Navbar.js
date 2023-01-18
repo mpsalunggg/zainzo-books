@@ -3,18 +3,13 @@ import Hamburger from ".././Assets/hamburger.png";
 import Zeinzo from ".././Assets/zainzo-people.png";
 import Notifikasi from ".././Assets/notifikasi.png";
 import Arrow from ".././Assets/arrow.png";
-import Sidebar from "./Sidebar";
 
 function Navbar() {
   const [open, setOpen] = useState(false);
-  const [openSidebar, setOpenSidebar] = useState(false);
   const profileRef = useRef();
 
   const handleClick = () => {
     return open ? setOpen(false) : setOpen(true);
-  };
-  const handleClickSidebar = () => {
-    return openSidebar ? setOpenSidebar(false) : setOpenSidebar(true);
   };
 
   useEffect(() => {
@@ -35,7 +30,7 @@ function Navbar() {
       <div className="h-20 w-full bg-white shadow-md flex items-center justify-between p-8">
         <div className="flex items-center gap-10">
           {/* <img src={Hamburger} className="w-6" /> */}
-          <button className="w-6 h-6 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: `url(${Hamburger})` }} onClick={handleClickSidebar} />
+          <button className="w-6 h-6 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: `url(${Hamburger})` }} />
           <input type="text" className="bg-custom outline-none rounded-full text-sm p-3 w-48 h-10" placeholder="Search employee" />
         </div>
         <img src={Zeinzo} className="w-28" />
@@ -57,7 +52,7 @@ function Navbar() {
               <div className="cursor-pointer" onClick={() => handleClick()}>
                 <div className="w-8 h-8 rounded-full bg-custom2" />
               </div>
-              <div className={`absolute top-24 right-3 bg-white w-40 rounded-3xl p-4 transition-all duration-200 ease-in ${!open ? "opacity-0 invisible translate-y-[-20px]" : "opacity-1 visible translate-y-0"}`}>
+              <div className={`absolute z-10 shadow-md top-24 right-3 bg-white w-40 rounded-3xl p-4 transition-all duration-200 ease-in ${!open ? "opacity-0 invisible translate-y-[-20px]" : "opacity-1 visible translate-y-0"}`}>
                 <ul className="text-custom flex flex-col justify-center gap-2">
                   <li>Account</li>
                   <li>Support</li>
@@ -69,7 +64,6 @@ function Navbar() {
           </div>
         </div>
       </div>
-      <Sidebar passingVal={openSidebar} />
     </>
   );
 }

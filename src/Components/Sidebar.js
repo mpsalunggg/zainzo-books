@@ -28,10 +28,10 @@ const iconData = [
   },
 ];
 
-function Sidebar({ passingVal }) {
+function Sidebar() {
   const [side, setSide] = useState(false);
   const [data, setData] = useState([]);
- 
+  const profileRef = useRef();
 
   const handleClickSide = (val) => {
     if (val.title === "Organization") {
@@ -52,41 +52,38 @@ function Sidebar({ passingVal }) {
     }
   };
 
+  useEffect(() => {
+    let handler = (e) => {
+      if (!profileRef.current.contains(e.target)) {
+        setSide(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handler);
+    return () => {
+      document.removeEventListener("mousedown", handler);
+    };
+  }, []);
+
   return (
-    <div className={`absolute z-10 transition-all duration-200 ease-in bg-redColor w-24 h-screen ${
-      !passingVal
-        ? "opacity-0 invisible translate-x-[-20px]"
-        : "opacity-1 visible translate-x-0"
-    }`} >
-      {passingVal && (
-          <div
-            className={`absolute z-10 transition-all duration-200 ease-in bg-redColor w-24 h-screen ${
-              !passingVal
-                ? "opacity-0 invisible translate-x-[-20px]"
-                : "opacity-1 visible translate-x-0"
-            }`}
-          >
-            {iconData.map((val) => {
-              return (
-                <div
-                  key={val.id}
-                  className="flex flex-col items-center justify-center p-6 cursor-pointer"
-                  onClick={() => handleClickSide(val)}
-                >
-                  <img
-                    src={val.iconTitle}
-                    className="w-8 h-8"
-                    alt={val.title}
-                  />
-                  <p className="text-white text-sm cursor-pointer">
-                    {val.title}
-                  </p>
-                </div>
-              );
-            })}
-            <ChildSideBar passingval2={side} passingData={data} />
-          </div>
-      )}
+    <div
+      className={`absolute z-10 bg-redColor w-24 min-h-screen`}
+    >
+      <div>
+        {iconData.map((val) => {
+          return (
+            <div
+              key={val.id}
+              className="flex flex-col items-center justify-center p-6 cursor-pointer"
+              onClick={() => handleClickSide(val)}
+            >
+              <img src={val.iconTitle} className="w-8 h-8" alt={val.title} />
+              <p className="text-white text-sm cursor-pointer">{val.title}</p>
+            </div>
+          );
+        })}
+        <ChildSideBar passingval2={side} passingData={data} setRef={profileRef}/>
+      </div>
     </div>
   );
 }

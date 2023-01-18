@@ -7,6 +7,7 @@ import { RiUserLine } from "react-icons/ri";
 import Personal from "./general/Personal";
 import Employment from "./general/Employment";
 import Navbar from "../../Components/Navbar";
+import Sidebar from "../../Components/Sidebar";
 
 class DetailEmployee extends Component {
   state = {
@@ -44,7 +45,8 @@ class DetailEmployee extends Component {
     return (
       <>
       <Navbar />
-      <div className="py-10 px-8 bg-gray-main min-h-screen">
+      <Sidebar />
+      <div className="ml-24 py-10 px-8 bg-gray-main min-h-screen">
         <div className="container mx-auto h-screen drop-shadow-md bg-white rounded-xl p-3 overflow-auto flex flex-row divide-x">
           <div className="w-60 min-w-60 flex flex-col items-center">
             <div className="max-w-prose flex-none p-8 grid ">
