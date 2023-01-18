@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import fotoprofil from "../../Assets/fotoprofil.svg";
 import editicon from "../../Assets/editicon.svg";
 import { AiOutlineClockCircle } from "react-icons/ai";
@@ -9,41 +9,42 @@ import Employment from "./general/Employment";
 import Navbar from "../../Components/Navbar";
 import Sidebar from "../../Components/Sidebar";
 
-class DetailEmployee extends Component {
-  state = {
-    switchMenuIndex: 0,
-    listMenu: [
-      {
-        title: "General",
-        has_submenu: true,
-        submenu: [
-          { title: "Personal", viewIndex: 0 },
-          { title: "Employment", viewIndex: 1 },
-          { title: "Education and Experience", viewIndex: 2 },
-          { title: "Additional Info", viewIndex: 3 },
-        ],
-        icon: RiUserLine,
-        menuOpen: false,
-      },
-      { title: "Attendance", has_submenu: true, submenu: [], icon: AiOutlineClockCircle, menuOpen: false },
-    ],
-    subMenuView: [{ view: Personal }, { view: Employment }],
-    viewNow: Personal,
-  };
+function DetailEmployee() {
+  const [switchMenuIndex, setSwitchMenuIndex] = useState(0);
+  const [menuOpenIndex, setMenuOpenIndex] = useState(-1);
+  const [listMenu, setListMenu] = useState([
+    {
+      title: "General",
+      has_submenu: true,
+      submenu: [
+        { title: "Personal", viewIndex: 0 },
+        { title: "Employment", viewIndex: 1 },
+        { title: "Education and Experience", viewIndex: 2 },
+        { title: "Additional Info", viewIndex: 3 },
+      ],
+      icon: RiUserLine,
+      menuOpen: false,
+    },
+    { title: "Attendance", has_submenu: true, submenu: [], icon: AiOutlineClockCircle, menuOpen: false },
+  ]);
+  const [subMenuView, setSubMenuView] = useState([{ view: () => Personal }, { view: () => Employment }]);
+  const [ViewNow, setViewNow] = useState(() => Personal);
 
-  OpenMenu = (index) => {
-    let newArr = this.state.listMenu;
+  const OpenMenu = (index) => {
+    const newArr = listMenu;
     newArr[index].menuOpen = !newArr[index].menuOpen;
-    this.setState({ listMenu: newArr });
+    menuOpenIndex !== index ? setMenuOpenIndex(index) : setMenuOpenIndex(-1);
+    setListMenu(newArr);
   };
 
-  showPage = (viewIndex) => {
-    this.setState({ viewNow: this.state.subMenuView[viewIndex].view, switchMenuIndex: viewIndex });
+  const showPage = (viewIndex) => {
+    setViewNow(subMenuView[viewIndex].view);
+    setSwitchMenuIndex(viewIndex);
+    console.log(viewIndex);
   };
 
-  render() {
-    return (
-      <>
+  return (
+    <>
       <Navbar />
       <Sidebar />
       <div className="ml-24 py-10 px-8 bg-gray-main min-h-screen">
@@ -57,42 +58,44 @@ class DetailEmployee extends Component {
             </div>
             <div className="flex-auto py-4 pl-4 self-start w-56">
               <ul>
-                {this.state.listMenu.map((item, index) => {
+                {listMenu.map((item, index) => {
                   return (
                     <div className={`flex flex-col cursor-pointer text-sm `}>
                       <li
                         key={index}
                         className={`font-medium flex-col cursor-pointer`}
                         onClick={() => {
-                          this.OpenMenu(index);
+                          OpenMenu(index);
                         }}
-                        >
+                      >
                         <span className="flex font-medium gap-x-2 items-center">
                           <span className="">
                             <item.icon color="gray" />
                           </span>
                           <span className="flex-1">{item.title} </span>
-                          {item.has_submenu && <IoIosArrowForward color="#717171" className={` mt-1 mr-2 ${item.menuOpen && "rotate-90 duration-200"}`} />}
+                          {item.has_submenu && <IoIosArrowForward color="#717171" className={` mt-1 mr-2 ${item.menuOpen ? "rotate-90 duration-200" : ""}`} />}
                         </span>
                       </li>
                       <span className="whitespace-nowrap my-2">
-                        {item.has_submenu && item.menuOpen && (
+                        {item.has_submenu && item.menuOpen ? (
                           <ul className="font-extralight">
                             {item.submenu.map((submenu, indexSub) => {
                               return (
                                 <li
-                                className={`pl-6 
-                                  hover:text-red-main font-thin ${this.state.switchMenuIndex === indexSub ? "text-red-main" : "text-gray-disabledText"}`}
+                                  className={`pl-6
+                                hover:text-red-main font-thin ${switchMenuIndex === indexSub ? "text-red-main" : "text-gray-disabledText"}`}
                                   key={indexSub}
                                   onClick={() => {
-                                    this.showPage(submenu.viewIndex);
+                                    showPage(submenu.viewIndex);
                                   }}
-                                  >
+                                >
                                   {submenu.title}
                                 </li>
                               );
                             })}
                           </ul>
+                        ) : (
+                          ""
                         )}
                       </span>
                     </div>
@@ -102,13 +105,18 @@ class DetailEmployee extends Component {
             </div>
           </div>
           <div className="">
-            <this.state.viewNow />
+            <ViewNow />
+            {/* <button
+              onClick={() => {
+              }}
+            >
+              press
+            </button> */}
           </div>
         </div>
       </div>
-      </>
-    );
-  }
+    </>
+  );
 }
 
 export default DetailEmployee;
