@@ -66,23 +66,17 @@ function Sidebar() {
   }, []);
 
   return (
-    <div
-      className={`absolute z-10 bg-redColor w-24 min-h-screen`}
-    >
+    <div className={`absolute z-10 bg-redColor w-24 min-h-screen`}>
       <div>
         {iconData.map((val) => {
           return (
-            <div
-              key={val.id}
-              className="flex flex-col items-center justify-center p-6 cursor-pointer"
-              onClick={() => handleClickSide(val)}
-            >
+            <div key={val.id} className="flex flex-col items-center justify-center p-6 cursor-pointer z-20" onClick={() => handleClickSide(val)}>
               <img src={val.iconTitle} className="w-8 h-8" alt={val.title} />
               <p className="text-white text-sm cursor-pointer">{val.title}</p>
             </div>
           );
         })}
-        <ChildSideBar passingval2={side} passingData={data} setRef={profileRef}/>
+        <ChildSideBar passingval2={side} passingData={data} setRef={profileRef} />
       </div>
     </div>
   );

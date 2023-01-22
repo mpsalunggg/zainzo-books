@@ -5,9 +5,11 @@ import Notifikasi from ".././Assets/notifikasi.png";
 import Arrow from ".././Assets/arrow.png";
 import { getUser, removeUserSession } from "../Utils/Common";
 import { useNavigate } from "react-router-dom";
+import Sidebar from "./Sidebar";
 
 function Navbar() {
   const [open, setOpen] = useState(false);
+  const [sidebarActive, setSidebarActive] = useState(false);
   const profileRef = useRef();
   const navigate = useNavigate();
   const user = getUser();
@@ -35,14 +37,27 @@ function Navbar() {
   };
 
   return (
-    <>
-      <div className="h-20 w-full bg-white shadow-md flex items-center justify-between p-8">
+    <div className="flex flex-col">
+      <div className="h-20 w-full bg-white shadow-md flex items-center justify-between p-8 fixed z-20 mb-96">
         <div className="flex items-center gap-10">
           {/* <img src={Hamburger} className="w-6" /> */}
-          <button className="w-6 h-6 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: `url(${Hamburger})` }} />
+          <button
+            className={`w-6 h-6 bg-cover bg-center bg-no-repeat `}
+            style={{ backgroundImage: `url(${Hamburger})` }}
+            onClick={() => {
+              setSidebarActive(!sidebarActive);
+            }}
+          />
           <input type="text" className="bg-custom outline-none rounded-full text-sm p-3 w-48 h-10" placeholder="Search employee" />
         </div>
-        <img src={Zeinzo} className="w-28" />
+        <img
+          src={Zeinzo}
+          className="w-28 cursor-pointer"
+          alt="zainzo"
+          onClick={() => {
+            navigate("/dashboard");
+          }}
+        />
         <div className="flex items-center">
           <div className="flex justify-center">
             <label className="relative inline-flex items-center mr-5 cursor-pointer">
@@ -75,7 +90,12 @@ function Navbar() {
           </div>
         </div>
       </div>
-    </>
+      {sidebarActive && (
+        <div className={`${!sidebarActive ? "translate-x-2" : ""}`}>
+          <Sidebar />
+        </div>
+      )}
+    </div>
   );
 }
 
