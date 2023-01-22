@@ -5,3 +5,7 @@
 body {
     background-color: #F5F5F5;
 }
+
+::-webkit-calendar-picker-indicator {
+    background-image: url('Assets/calendar.png');
+  }

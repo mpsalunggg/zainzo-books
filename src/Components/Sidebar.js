@@ -28,7 +28,7 @@ const iconData = [
   },
 ];
 
-function Sidebar() {
+function Sidebar({ open, setRef }) {
   const [side, setSide] = useState(false);
   const [data, setData] = useState([]);
   const profileRef = useRef();
@@ -52,19 +52,6 @@ function Sidebar() {
     }
   };
 
-  useEffect(() => {
-    let handler = (e) => {
-      if (!profileRef.current.contains(e.target)) {
-        setSide(false);
-      }
-    };
-
-    document.addEventListener("mousedown", handler);
-    return () => {
-      document.removeEventListener("mousedown", handler);
-    };
-  }, []);
-
   return (
     <div className={`absolute z-10 bg-redColor w-24 min-h-screen`}>
       <div>
@@ -77,6 +64,23 @@ function Sidebar() {
           );
         })}
         <ChildSideBar passingval2={side} passingData={data} setRef={profileRef} />
+      </div>
+      <div>
+        {open && (
+          <div className={`fixed z-10 bg-redColor w-[90px] min-h-screen`}>
+            <div>
+              {iconData.map((val) => {
+                return (
+                  <div key={val.id} className="flex flex-col items-center justify-center p-4 cursor-pointer" onClick={() => handleClickSide(val)}>
+                    <img src={val.iconTitle} className="w-8 h-8" alt={val.title} />
+                    <p className="text-white text-[10px] cursor-pointer">{val.title}</p>
+                  </div>
+                );
+              })}
+              <ChildSideBar passingval2={side} passingData={data} setRef={profileRef} />
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

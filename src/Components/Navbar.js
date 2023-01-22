@@ -9,13 +9,18 @@ import Sidebar from "./Sidebar";
 
 function Navbar() {
   const [open, setOpen] = useState(false);
-  const [sidebarActive, setSidebarActive] = useState(false);
+
+  const [openSide, setOpenSide] = useState(false);
   const profileRef = useRef();
   const navigate = useNavigate();
   const user = getUser();
 
   const handleClick = () => {
     return open ? setOpen(false) : setOpen(true);
+  };
+
+  const handleClickSide = () => {
+    return openSide ? setOpenSide(false) : setOpenSide(true);
   };
 
   useEffect(() => {
@@ -37,17 +42,11 @@ function Navbar() {
   };
 
   return (
-    <div className="flex flex-col">
-      <div className="h-20 w-full bg-white shadow-md flex items-center justify-between p-8 fixed z-20 mb-96">
+    <>
+      <div className="sticky top-0 z-10 h-20 w-full bg-white shadow-md flex items-center justify-between p-8">
         <div className="flex items-center gap-10">
           {/* <img src={Hamburger} className="w-6" /> */}
-          <button
-            className={`w-6 h-6 bg-cover bg-center bg-no-repeat `}
-            style={{ backgroundImage: `url(${Hamburger})` }}
-            onClick={() => {
-              setSidebarActive(!sidebarActive);
-            }}
-          />
+          <button className="w-6 h-6 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: `url(${Hamburger})` }} onClick={() => handleClickSide()} />
           <input type="text" className="bg-custom outline-none rounded-full text-sm p-3 w-48 h-10" placeholder="Search employee" />
         </div>
         <img
@@ -90,12 +89,8 @@ function Navbar() {
           </div>
         </div>
       </div>
-      {sidebarActive && (
-        <div className={`${!sidebarActive ? "translate-x-2" : ""}`}>
-          <Sidebar />
-        </div>
-      )}
-    </div>
+      {openSide && <Sidebar open={openSide} setRef={profileRef} />}
+    </>
   );
 }
 
