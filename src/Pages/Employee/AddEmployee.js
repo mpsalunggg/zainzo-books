@@ -22,7 +22,7 @@ function AddEmployee() {
   return (
     <div>
       <Navbar />
-      <Sidebar />
+      {/* <Sidebar /> */}
       <div className="py-10 px-10 bg-gray-main h-auto ml-24">
         <div className="container mx-auto h-full drop-shadow-md bg-white rounded-xl p-3 overflow-auto divide-x">
           {

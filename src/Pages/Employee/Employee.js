@@ -62,7 +62,7 @@ function Employee() {
   return (
     <div>
       <Navbar />
-      <Sidebar />
+      {/* <Sidebar /> */}
       <div className="ml-24 p-8 bg-gray-main min-h-screen">
         <div className="mb-7 flex flex-row">
           <h1 className="text-xl mr-auto font-normal">Employee</h1>

@@ -5,15 +5,22 @@ import Notifikasi from ".././Assets/notifikasi.png";
 import Arrow from ".././Assets/arrow.png";
 import { getUser, removeUserSession } from "../Utils/Common";
 import { useNavigate } from "react-router-dom";
+import Sidebar from "./Sidebar";
 
 function Navbar() {
   const [open, setOpen] = useState(false);
+  const [openSide, setOpenSide] = useState(false);
+
   const profileRef = useRef();
   const navigate = useNavigate();
   const user = getUser();
 
   const handleClick = () => {
     return open ? setOpen(false) : setOpen(true);
+  };
+
+  const handleClickSide = () => {
+    return openSide ? setOpenSide(false) : setOpenSide(true);
   };
 
   useEffect(() => {
@@ -39,8 +46,16 @@ function Navbar() {
       <div className="sticky top-0 z-10 h-20 w-full bg-white shadow-md flex items-center justify-between p-8">
         <div className="flex items-center gap-10">
           {/* <img src={Hamburger} className="w-6" /> */}
-          <button className="w-6 h-6 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: `url(${Hamburger})` }} />
-          <input type="text" className="bg-custom outline-none rounded-full text-sm p-3 w-48 h-10" placeholder="Search employee" />
+          <button
+            className="w-6 h-6 bg-cover bg-center bg-no-repeat"
+            style={{ backgroundImage: `url(${Hamburger})` }}
+            onClick={() => handleClickSide()}
+          />
+          <input
+            type="text"
+            className="bg-custom outline-none rounded-full text-sm p-3 w-48 h-10"
+            placeholder="Search employee"
+          />
         </div>
         <img src={Zeinzo} className="w-28" />
         <div className="flex items-center">
@@ -57,11 +72,25 @@ function Navbar() {
               <img src={Arrow} className="w-8" />
             </div>
             <div className="flex items-center gap-3" ref={profileRef}>
-              <p className="text-md text-custom">{user.employee_nickname ? user.employee_nickname : "nama"}</p>
+              <p className="text-md text-custom">
+                {user.employee_nickname ? user.employee_nickname : "nama"}
+              </p>
               <div className="cursor-pointer" onClick={() => handleClick()}>
-                {user.employee_photo ? <div className="w-8 h-8 rounded-full bg-custom2">{user.employee_photo}</div> : <div className="w-8 h-8 rounded-full bg-custom2" />}
+                {user.employee_photo ? (
+                  <div className="w-8 h-8 rounded-full bg-custom2">
+                    {user.employee_photo}
+                  </div>
+                ) : (
+                  <div className="w-8 h-8 rounded-full bg-custom2" />
+                )}
               </div>
-              <div className={`absolute z-10 shadow-md top-24 right-3 bg-white w-40 rounded-3xl p-4 transition-all duration-200 ease-in ${!open ? "opacity-0 invisible translate-y-[-20px]" : "opacity-1 visible translate-y-0"}`}>
+              <div
+                className={`absolute z-10 shadow-md top-24 right-3 bg-white w-40 rounded-3xl p-4 transition-all duration-200 ease-in ${
+                  !open
+                    ? "opacity-0 invisible translate-y-[-20px]"
+                    : "opacity-1 visible translate-y-0"
+                }`}
+              >
                 <ul className="text-custom flex flex-col justify-center gap-2">
                   <li>Account</li>
                   <li>Support</li>
@@ -75,6 +104,7 @@ function Navbar() {
           </div>
         </div>
       </div>
+      <Sidebar open={openSide} setRef={profileRef} />
     </>
   );
 }
