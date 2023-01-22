@@ -38,7 +38,7 @@ function Register() {
           setError("something went wrong. try again later");
         }
       });
-    // getToken() ? navigate("/onboarding") : navigate("/login");
+    // getToken() ? navigate("/onboarding") : navigate("/");
     setPassword("");
     // }
   };

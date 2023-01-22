@@ -14,8 +14,8 @@ function Routing() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route exact path="/login" element={<Login />} />
-        <Route path="/" element={<NonAuthRoute />}>
+        <Route exact path="/" element={<Login />} />
+        <Route element={<NonAuthRoute />}>
           <Route path="/register" element={<Register />} />
         </Route>
         <Route element={<AuthRoutes />}>

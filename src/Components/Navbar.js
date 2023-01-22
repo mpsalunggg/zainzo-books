@@ -31,7 +31,7 @@ function Navbar() {
 
   const handleLogout = () => {
     removeUserSession();
-    navigate("/login");
+    navigate("/");
   };
 
   return (
