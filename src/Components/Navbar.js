@@ -3,10 +3,14 @@ import Hamburger from ".././Assets/hamburger.png";
 import Zeinzo from ".././Assets/zainzo-people.png";
 import Notifikasi from ".././Assets/notifikasi.png";
 import Arrow from ".././Assets/arrow.png";
+import { getUser, removeUserSession } from "../Utils/Common";
+import { useNavigate } from "react-router-dom";
 
 function Navbar() {
   const [open, setOpen] = useState(false);
   const profileRef = useRef();
+  const navigate = useNavigate();
+  const user = getUser();
 
   const handleClick = () => {
     return open ? setOpen(false) : setOpen(true);
@@ -24,6 +28,11 @@ function Navbar() {
       document.removeEventListener("mousedown", handler);
     };
   }, []);
+
+  const handleLogout = () => {
+    removeUserSession();
+    navigate("/login");
+  };
 
   return (
     <>
@@ -48,16 +57,18 @@ function Navbar() {
               <img src={Arrow} className="w-8" />
             </div>
             <div className="flex items-center gap-3" ref={profileRef}>
-              <p className="text-md text-custom">Name</p>
+              <p className="text-md text-custom">{user.employee_nickname ? user.employee_nickname : "nama"}</p>
               <div className="cursor-pointer" onClick={() => handleClick()}>
-                <div className="w-8 h-8 rounded-full bg-custom2" />
+                {user.employee_photo ? <div className="w-8 h-8 rounded-full bg-custom2">{user.employee_photo}</div> : <div className="w-8 h-8 rounded-full bg-custom2" />}
               </div>
               <div className={`absolute z-10 shadow-md top-24 right-3 bg-white w-40 rounded-3xl p-4 transition-all duration-200 ease-in ${!open ? "opacity-0 invisible translate-y-[-20px]" : "opacity-1 visible translate-y-0"}`}>
                 <ul className="text-custom flex flex-col justify-center gap-2">
                   <li>Account</li>
                   <li>Support</li>
                   <hr></hr>
-                  <li>Sign Out</li>
+                  <li className="cursor-pointer" onClick={handleLogout}>
+                    Sign Out
+                  </li>
                 </ul>
               </div>
             </div>

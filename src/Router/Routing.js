@@ -7,19 +7,24 @@ import AddEmployee from "../Pages/Employee/AddEmployee";
 import DetailEmployee from "../Pages/Employee/DetailEmployee";
 import Employee from "../Pages/Employee/Employee";
 import Onboarding from "../Pages/Onboarding";
+import NonAuthRoute from "./NonAuthRoute";
+import AuthRoutes from "./AuthRoutes";
 
 function Routing() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/onboarding" element={<Onboarding />} />
-        <Route path="/employees" element={<Employee />} />
-        <Route path="/employee-detail" element={<DetailEmployee />} />
-        <Route path="/add-employee" element={<AddEmployee />} />
-        {/* <Route component={NotFound} /> */}
+        <Route exact path="/login" element={<Login />} />
+        <Route path="/" element={<NonAuthRoute />}>
+          <Route path="/register" element={<Register />} />
+        </Route>
+        <Route element={<AuthRoutes />}>
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/onboarding" element={<Onboarding />} />
+          <Route path="/employees" element={<Employee />} />
+          <Route path="/employee-detail" element={<DetailEmployee />} />
+          <Route exact path="/add-employee" element={<AddEmployee />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );
