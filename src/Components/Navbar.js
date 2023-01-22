@@ -36,7 +36,7 @@ function Navbar() {
 
   return (
     <>
-      <div className="h-20 w-full bg-white shadow-md flex items-center justify-between p-8">
+      <div className="sticky top-0 z-10 h-20 w-full bg-white shadow-md flex items-center justify-between p-8">
         <div className="flex items-center gap-10">
           {/* <img src={Hamburger} className="w-6" /> */}
           <button className="w-6 h-6 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: `url(${Hamburger})` }} />

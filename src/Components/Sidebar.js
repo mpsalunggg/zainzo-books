@@ -67,18 +67,18 @@ function Sidebar() {
 
   return (
     <div
-      className={`absolute z-10 bg-redColor w-24 min-h-screen`}
+      className={`fixed z-10 bg-redColor w-[90px] min-h-screen`}
     >
       <div>
         {iconData.map((val) => {
           return (
             <div
               key={val.id}
-              className="flex flex-col items-center justify-center p-6 cursor-pointer"
+              className="flex flex-col items-center justify-center p-4 cursor-pointer"
               onClick={() => handleClickSide(val)}
             >
               <img src={val.iconTitle} className="w-8 h-8" alt={val.title} />
-              <p className="text-white text-sm cursor-pointer">{val.title}</p>
+              <p className="text-white text-[10px] cursor-pointer">{val.title}</p>
             </div>
           );
         })}
