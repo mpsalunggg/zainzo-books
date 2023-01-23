@@ -4,7 +4,12 @@ import Sidebar from ".././Components/Sidebar";
 import Employee from "./Employee/Employee";
 
 function Dashboard() {
-  return <div>Dashboard</div>;
+  return (
+    <>
+      <Navbar />
+      {/* <Sidebar /> */}
+    </>
+  );
 }
 
 export default Dashboard;
