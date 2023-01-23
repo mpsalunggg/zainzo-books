@@ -5,11 +5,13 @@ export const getUser = () => {
 };
 
 export const getToken = () => {
-  return sessionStorage.getItem("token") || null;
+  const tokenStr = sessionStorage.getItem("token");
+  if (tokenStr) return JSON.parse(tokenStr);
+  else return null;
 };
 
 export const setUserSession = (token, user) => {
-  sessionStorage.setItem("token", token);
+  sessionStorage.setItem("token", JSON.stringify(token));
   sessionStorage.setItem("user", JSON.stringify(user));
 };
 

@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Login from ".././Pages/Login";
 import Register from ".././Pages/Register";
 import Dashboard from "../Pages/Dashboard";
@@ -9,25 +9,23 @@ import Employee from "../Pages/Employee/Employee";
 import Onboarding from "../Pages/Onboarding";
 import NonAuthRoute from "./NonAuthRoute";
 import AuthRoutes from "./AuthRoutes";
+// import Navbar from "../Components/Navbar";
 
 function Routing() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route exact path="/" element={<Login />} />
-        <Route element={<NonAuthRoute />}>
-          <Route path="/register" element={<Register />} />
-        </Route>
-        <Route element={<AuthRoutes />}>
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/onboarding" element={<Onboarding />} />
-          <Route path="/employees" element={<Employee />} />
-          <Route path="/employee-detail" element={<DetailEmployee />} />
-          <Route exact path="/add-employee" element={<AddEmployee />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+    <Routes>
+      <Route exact path="/" element={<Login />} />
+      <Route element={<NonAuthRoute />}>
+        <Route path="/register" element={<Register />} />
+      </Route>
+      <Route element={<AuthRoutes />}>
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/onboarding" element={<Onboarding />} />
+        <Route path="/employees" element={<Employee />} />
+        <Route path="/employee-detail" element={<DetailEmployee />} />
+        <Route exact path="/add-employee" element={<AddEmployee />} />
+      </Route>
+    </Routes>
   );
 }
-
 export default Routing;

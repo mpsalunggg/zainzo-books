@@ -3,7 +3,7 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import LoginImg from ".././Assets/loginimage.png";
 import ZainzoImg from ".././Assets/zainzo-people.png";
-import { setUserSession } from "../Utils/Common";
+import { getToken, getUser, setUserSession } from "../Utils/Common";
 
 // fauliarahma05@gmail.com
 // 12345678
@@ -28,8 +28,9 @@ function Login() {
         })
         .then((res) => {
           setLoading(false);
-          setUserSession(res.data.token, res.data.user);
+          setUserSession(res.data.token.original.access_token, res.data.user);
           navigate("/dashboard");
+          localStorage.setItem("token", res.data.token.original.access_token);
         })
         .catch((error) => {
           setLoading(false);

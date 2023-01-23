@@ -60,9 +60,10 @@ function Employee() {
   let navigate = useNavigate();
 
   return (
-    <div className="">
-      <Navbar />
-      <div className="ml-24 p-8 bg-gray-main min-h-screen">
+    <div className="flex flex-col">
+      {/* <Navbar /> */}
+      <div className="p-8 bg-gray-main min-h-screen">
+        {/* <div className=" p-8 bg-blue-500 min-h-screen"> */}
         <div className="mb-7 flex flex-row">
           <h1 className="text-xl mr-auto font-normal">Employee</h1>
           <button
