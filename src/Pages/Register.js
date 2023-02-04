@@ -123,7 +123,7 @@ function Register() {
         </button>
         <p className="text-sm flex justify-center items-center">
           Sudah punya akun?{" "}
-          <Link to={"/login"} className="text-redColor">
+          <Link to={"/"} className="text-redColor">
             Masuk
           </Link>
         </p>

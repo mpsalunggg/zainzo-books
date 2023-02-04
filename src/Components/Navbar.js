@@ -6,6 +6,8 @@ import Arrow from ".././Assets/arrow.png";
 import { getUser, removeUserSession } from "../Utils/Common";
 import { useNavigate, useLocation } from "react-router-dom";
 import Sidebar from "./Sidebar";
+import axios from "axios";
+import { getToken } from "../Utils/Common";
 
 function Navbar() {
   const [open, setOpen] = useState(false);
@@ -17,7 +19,7 @@ function Navbar() {
   const location = useLocation();
 
   const checkLocation = () => {
-    const navbarShowLoc = ["/dashboard", "/employees", "/employee-detail", "/add-employee"];
+    const navbarShowLoc = ["/dashboard", "/employees", `/employee-detail`, "/add-employee"];
     let correctLoc = "";
     for (let index = 0; index < navbarShowLoc.length; index++) {
       if (location.pathname === navbarShowLoc[index]) {
@@ -35,18 +37,18 @@ function Navbar() {
     return openSide ? setOpenSide(false) : setOpenSide(true);
   };
 
-  useEffect(() => {
-    let handler = (e) => {
-      if (!profileRef.current.contains(e.target)) {
-        setOpen(false);
-      }
-    };
+  // useEffect(() => {
+  //   let handler = (e) => {
+  //     if (!profileRef.current.contains(e.target)) {
+  //       setOpen(false);
+  //     }
+  //   };
 
-    document.addEventListener("mousedown", handler);
-    return () => {
-      document.removeEventListener("mousedown", handler);
-    };
-  }, []);
+  //   document.addEventListener("mousedown", handler);
+  //   return () => {
+  //     document.removeEventListener("mousedown", handler);
+  //   };
+  // }, []);
 
   const handleLogout = () => {
     removeUserSession();

@@ -27,6 +27,7 @@ function Login() {
           password: password,
         })
         .then((res) => {
+          console.log(res)
           setLoading(false);
           setUserSession(res.data.token.original.access_token, res.data.user);
           navigate("/dashboard");
@@ -34,11 +35,12 @@ function Login() {
         })
         .catch((error) => {
           setLoading(false);
-          if (error.response.status === 401) {
-            setError(error.response.data.error);
-          } else {
-            setError("something went wrong. try again later");
-          }
+          console.log(error)
+          // if (error.response.status === 401) {
+          //   setError(error.response.data.error);
+          // } else {
+          //   setError("something went wrong. try again later");
+          // }
         });
     }
     setEmail("");
@@ -60,7 +62,7 @@ function Login() {
           <img src={ZainzoImg} className="w-28" />
         </div>
         <div>
-          <label for="first_name" className="block mb-2 text-sm font-medium text-gray-900 ">
+          <label htmlFor="first_name" className="block mb-2 text-sm font-medium text-gray-900 ">
             Email
           </label>
           <input
@@ -73,7 +75,7 @@ function Login() {
           />
         </div>
         <div>
-          <label for="Password" className="block mb-2 text-sm font-medium text-gray-900 ">
+          <label htmlFor="Password" className="block mb-2 text-sm font-medium text-gray-900 ">
             Password
           </label>
           <input

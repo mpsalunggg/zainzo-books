@@ -6,7 +6,7 @@ import Employee from "./Employee/Employee";
 function Dashboard() {
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
       {/* <Sidebar /> */}
     </>
   );

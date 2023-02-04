@@ -22,7 +22,7 @@ function Routing() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/onboarding" element={<Onboarding />} />
         <Route path="/employees" element={<Employee />} />
-        <Route path="/employee-detail" element={<DetailEmployee />} />
+        <Route path="/employee-detail/:id" element={<DetailEmployee />} />
         <Route exact path="/add-employee" element={<AddEmployee />} />
       </Route>
     </Routes>
