@@ -1,8 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { IoAddOutline } from "react-icons/io5";
-import Ellipse from "../../Assets/Ellipse3.svg";
-import Navbar from "../../Components/Navbar";
-import Sidebar from "../../Components/Sidebar";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { getToken } from "../../Utils/Common";

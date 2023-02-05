@@ -1,13 +1,10 @@
 import React, { useEffect, useState } from "react";
-import fotoprofil from "../../Assets/fotoprofil.svg";
 import editicon from "../../Assets/editicon.svg";
 import Personal from "./general/Personal";
 import Employment from "./general/Employment";
 import arrowIcon from "../../Assets/arrow-right.svg";
 import userIcon from "../../Assets/user.svg";
 import clockIcon from "../../Assets/clock.svg";
-import Navbar from "../../Components/Navbar";
-import Sidebar from "../../Components/Sidebar";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { getToken } from "../../Utils/Common";

@@ -1,6 +1,4 @@
 import React, { createContext, useState } from "react";
-import Navbar from "../../Components/Navbar";
-import Sidebar from "../../Components/Sidebar";
 import AddPersonal from "./addEmployee/AddPersonal";
 import AddEmployement from "./addEmployee/AddEmployment";
 import AddPayroll from "./addEmployee/AddPayroll";
