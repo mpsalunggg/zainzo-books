@@ -27,6 +27,7 @@ function Login() {
           password: password,
         })
         .then((res) => {
+          console.log(res);
           setLoading(false);
           setUserSession(res.data.token.original.access_token, res.data.user);
           navigate("/dashboard");
@@ -40,6 +41,7 @@ function Login() {
           } else {
             setError("something went wrong. try again later");
           }
+          // console.log(error)
         });
     }
     setEmail("");

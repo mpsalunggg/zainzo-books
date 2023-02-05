@@ -1,15 +1,41 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import fotoprofil from "../../Assets/fotoprofil.svg";
 import editicon from "../../Assets/editicon.svg";
 import Personal from "./general/Personal";
 import Employment from "./general/Employment";
+<<<<<<< HEAD
 import arrowIcon from "../../Assets/arrow-right.svg";
 import userIcon from "../../Assets/user.svg";
 import clockIcon from "../../Assets/clock.svg";
+=======
+import Navbar from "../../Components/Navbar";
+import Sidebar from "../../Components/Sidebar";
+import { useParams } from "react-router-dom";
+import axios from "axios";
+import { getToken } from "../../Utils/Common";
+import UserPhoto from "../../Assets/userphoto.svg"
+>>>>>>> e0288aba6d9c238da4c046f13bf5e98bd8bebd94
 
 function DetailEmployee() {
   const [switchMenuIndex, setSwitchMenuIndex] = useState(0);
   const [menuOpenIndex, setMenuOpenIndex] = useState(-1);
+
+  const { id } = useParams();
+  const [datalist, setData] = useState([]);
+
+  useEffect(() => {
+    console.log(id);
+    axios
+      .get(`http://people.api.zainzo.com/api/admin/employee/personal/${id}`, {
+        headers: {
+          Authorization: `Bearer ${getToken()}`,
+        },
+      })
+      .then((res) => setData(res.data.data[0]))
+      .catch((err) => console.log(err.message));
+  }, [id]);
+  console.log(datalist);
+
   const [listMenu, setListMenu] = useState([
     {
       title: "General",
@@ -23,10 +49,31 @@ function DetailEmployee() {
       icon: userIcon,
       menuOpen: false,
     },
+<<<<<<< HEAD
     { title: "Attendance", has_submenu: true, submenu: [], icon: clockIcon, menuOpen: false },
+=======
+    {
+      title: "Attendance",
+      has_submenu: true,
+      submenu: [],
+      icon: AiOutlineClockCircle,
+      menuOpen: false,
+    },
+>>>>>>> e0288aba6d9c238da4c046f13bf5e98bd8bebd94
   ]);
-  const [subMenuView, setSubMenuView] = useState([{ view: () => Personal }, { view: () => Employment }]);
-  const [ViewNow, setViewNow] = useState(() => Personal);
+
+  const CompPersonal = () => {
+    return <Personal id={id} />;
+  };
+  const CompEmployment = () => {
+    return <Employment id={id} />;
+  };
+
+  const [subMenuView, setSubMenuView] = useState([
+    { view: () => CompPersonal },
+    { view: () => CompEmployment },
+  ]);
+  const [ViewNow, setViewNow] = useState(() => CompPersonal);
 
   const OpenMenu = (index) => {
     const newArr = listMenu;
@@ -43,6 +90,7 @@ function DetailEmployee() {
 
   return (
     <div className="flex flex-col">
+<<<<<<< HEAD
       <div className="py-10 px-4 min-h-screen">
         {/* all container */}
         <div className="container mx-auto h-screen drop-shadow-md bg-white rounded-xl p-3 overflow-auto flex flex-row divide-x">
@@ -51,14 +99,31 @@ function DetailEmployee() {
             <div className="max-w-prose flex-none p-8 grid ">
               <img src={fotoprofil} alt="profil" className="mx-auto" />
               <img src={editicon} alt="edit" className="absolute left-36 top-26 " />
+=======
+      <div className="py-10 px-8 bg-gray-main min-h-screen">
+        <div className="container mx-auto h-auto drop-shadow-md bg-white rounded-xl p-3 overflow-auto flex flex-row divide-x pb-12">
+          <div className="flex flex-col items-center">
+            <div className="max-w-prose flex-none p-8 grid">
+              <img src={UserPhoto} alt="profil" className="w-20 mx-auto" />
+              <img
+                src={editicon}
+                alt="edit"
+                className="absolute left-36 top-26 "
+              />
+>>>>>>> e0288aba6d9c238da4c046f13bf5e98bd8bebd94
               {/* <div className="text-center font-semibold whitespace-normal mt-2">Muhammad Zaky Iqbal Ramadhan</div> */}
-              <div className="text-center font-bold whitespace-normal text-lg mt-6">Margaret Febiola</div>
+              <div className="text-center font-bold whitespace-normal text-lg mt-6">
+                {datalist.employee_fullname}
+              </div>
             </div>
             <div className="flex-auto py-4 pl-4 self-start w-56">
               <ul>
                 {listMenu.map((item, index) => {
                   return (
-                    <div className={`flex flex-col cursor-pointer text-sm `}>
+                    <div
+                      key={index}
+                      className={`flex flex-col cursor-pointer text-sm `}
+                    >
                       <li
                         key={index}
                         className={`font-medium flex-col cursor-pointer`}
@@ -71,7 +136,18 @@ function DetailEmployee() {
                             <img src={item.icon} alt="menuicon" />
                           </span>
                           <span className="flex-1">{item.title} </span>
+<<<<<<< HEAD
                           {item.has_submenu && <img src={arrowIcon} alt="open menu" className={` mt-1 mr-2 ${item.menuOpen ? "rotate-90 duration-200" : ""}`} />}
+=======
+                          {item.has_submenu && (
+                            <IoIosArrowForward
+                              color="#717171"
+                              className={` mt-1 mr-2 ${
+                                item.menuOpen ? "rotate-90 duration-200" : ""
+                              }`}
+                            />
+                          )}
+>>>>>>> e0288aba6d9c238da4c046f13bf5e98bd8bebd94
                         </span>
                       </li>
                       <span className="whitespace-nowrap my-2">
@@ -81,7 +157,11 @@ function DetailEmployee() {
                               return (
                                 <li
                                   className={`pl-6
-                                hover:text-red-main font-thin ${switchMenuIndex === indexSub ? "text-red-main" : "text-gray-disabledText"}`}
+                                hover:text-red-main font-thin ${
+                                  switchMenuIndex === indexSub
+                                    ? "text-red-main"
+                                    : "text-gray-disabledText"
+                                }`}
                                   key={indexSub}
                                   onClick={() => {
                                     showPage(submenu.viewIndex);
@@ -102,8 +182,12 @@ function DetailEmployee() {
               </ul>
             </div>
           </div>
+<<<<<<< HEAD
           {/* component kanan */}
           <div className="">
+=======
+          <div className="w-full">
+>>>>>>> e0288aba6d9c238da4c046f13bf5e98bd8bebd94
             <ViewNow />
             {/* <button
               onClick={() => {

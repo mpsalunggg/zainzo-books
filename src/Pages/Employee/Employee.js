@@ -1,63 +1,56 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { IoAddOutline } from "react-icons/io5";
 import Ellipse from "../../Assets/Ellipse3.svg";
 import Navbar from "../../Components/Navbar";
 import Sidebar from "../../Components/Sidebar";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { getToken } from "../../Utils/Common";
+import UserPhoto from "../../Assets/userphoto.svg";
 
 function Employee() {
-  const [dataList, setDataList] = useState([
-    {
-      data: {
-        id: 1,
-        photo: "../Ellipse3.svg",
-        name: "Muhammad Iqbal Zaky",
-        employeeId: "HT0211",
-        department: "Finance",
-        jobPosition: "Staff Finance",
-        jobLevel: "Staff",
-        status: "Internship",
-        joinDate: "1 Jan 2022",
-        endDate: "1 Jan 2023",
-        resignDate: "1 Jan 2023",
-        email: "muhammad45289002@gmail.com",
-        birthDate: "31 Dec 1994",
-        placeOfBirth: "Jakarta",
-        age: 21,
-        address: "JL. Kertajaya No.10",
-        phoneNumber: "08560662341",
-        gender: "Male",
-        maritalStatus: "Single",
-        religion: "Islam",
-      },
-    },
-    {
-      data: {
-        id: 2,
-        photo: "Ellipse",
-        name: "Margaret Febiola",
-        employeeId: "HWS74",
-        department: "Human Resources",
-        jobPosition: "Junior Recruiter",
-        jobLevel: "Staff",
-        status: "Contract",
-        joinDate: "4 Jan 2020",
-        endDate: "-",
-        resignDate: "-",
-        email: "margaretfebiola@gmail.com",
-        birthDate: "23 Jun 1999",
-        placeOfBirth: "Semarang",
-        age: 39,
-        address: "Semiolong Rt.1 Rw.2",
-        phoneNumber: "084563883213",
-        gender: "Female",
-        maritalStatus: "Married",
-        religion: "Chatolic",
-      },
-    },
-  ]);
+  const [dataList, setDataList] = useState([]);
+
+  function calculateAge(birthDate) {
+    let today = new Date();
+    let birth = new Date(birthDate);
+    let age = today.getFullYear() - birth.getFullYear();
+    let month = today.getMonth() - birth.getMonth();
+  
+    if (month < 0 || (month === 0 && today.getDate() < birth.getDate())) {
+      age--;
+    }
+    return age;
+  }
+
+  // useEffect(()=>{
+  //   axios.get("https://people.api.zainzo.com/api/admin/department", {
+  //     headers: {
+  //       Authorization: `Bearer ${getToken()}`,
+  //     },
+  //   })
+  //   // .then(res => console.log(res))
+  // },[])
+
+  useEffect(() => {
+    axios
+      .get("https://people.api.zainzo.com/api/admin/employee", {
+        headers: {
+          Authorization: `Bearer ${getToken()}`,
+        },
+      })
+      .then((res) => {
+        setDataList(res.data.employee);
+        console.log(res);
+      });
+    // .catch(err => console.log(err.message))
+  }, []);
 
   let navigate = useNavigate();
+  // console.log(dataList[0].department_name.department_name)
+  // dataList.forEach(item => {
+  //   console.log(item.department_name)
+  // })
 
   return (
     <div className="flex flex-col items-center mt-2">
@@ -87,27 +80,60 @@ function Employee() {
             <thead>
               <tr className="text-center my-10 py-10">
                 <th>
-                  <input type="checkbox" className="relative appearance-none w-3 h-3 border border-solid border-black rounded accent-blue-500" />
+                  <input
+                    type="checkbox"
+                    className="relative appearance-none w-3 h-3 border border-solid border-black rounded accent-blue-500"
+                  />
                 </th>
                 <th className="font-semibold p-3 whitespace-nowrap">Photo</th>
                 <th className="font-semibold px-6 whitespace-nowrap">Name</th>
-                <th className="font-semibold px-6 whitespace-nowrap">Employee ID</th>
-                <th className="font-semibold px-6 whitespace-nowrap">Department</th>
-                <th className="font-semibold px-6 whitespace-nowrap">Job Position</th>
-                <th className="font-semibold px-6 whitespace-nowrap ">Job Level</th>
-                <th className="font-semibold px-6 whitespace-nowrap ">Status</th>
-                <th className="font-semibold px-6 whitespace-nowrap ">Join Date</th>
-                <th className="font-semibold px-6 whitespace-nowrap ">End Date</th>
-                <th className="font-semibold px-6 whitespace-nowrap ">Resign Date</th>
+                <th className="font-semibold px-6 whitespace-nowrap">
+                  Employee ID
+                </th>
+                <th className="font-semibold px-6 whitespace-nowrap">
+                  Department
+                </th>
+                <th className="font-semibold px-6 whitespace-nowrap">
+                  Job Position
+                </th>
+                <th className="font-semibold px-6 whitespace-nowrap ">
+                  Job Level
+                </th>
+                <th className="font-semibold px-6 whitespace-nowrap ">
+                  Status
+                </th>
+                <th className="font-semibold px-6 whitespace-nowrap ">
+                  Join Date
+                </th>
+                <th className="font-semibold px-6 whitespace-nowrap ">
+                  End Date
+                </th>
+                <th className="font-semibold px-6 whitespace-nowrap ">
+                  Resign Date
+                </th>
                 <th className="font-semibold px-6 whitespace-nowrap ">Email</th>
-                <th className="font-semibold px-6 whitespace-nowrap ">Birth Date</th>
-                <th className="font-semibold px-6 whitespace-nowrap ">Place Of Birth</th>
+                <th className="font-semibold px-6 whitespace-nowrap ">
+                  Birth Date
+                </th>
+                <th className="font-semibold px-6 whitespace-nowrap ">
+                  Place Of Birth
+                </th>
                 <th className="font-semibold px-6 whitespace-nowrap ">Age</th>
-                <th className="font-semibold px-6 whitespace-nowrap ">Address</th>
-                <th className="font-semibold px-6 whitespace-nowrap ">Phone Number</th>
-                <th className="font-semibold px-6 whitespace-nowrap ">Gender</th>
-                <th className="font-semibold px-6 whitespace-nowrap ">Marital Status</th>
-                <th className="font-semibold px-6 whitespace-nowrap ">Religion</th>
+                <th className="font-semibold px-6 whitespace-nowrap ">
+                  Address
+                </th>
+                <th className="font-semibold px-6 whitespace-nowrap ">
+                  Phone Number
+                </th>
+                <th className="font-semibold px-6 whitespace-nowrap ">
+                  Gender
+                </th>
+                <th className="font-semibold px-6 whitespace-nowrap ">
+                  Marital Status
+                </th>
+                <th className="font-semibold px-6 whitespace-nowrap ">
+                  Religion
+                </th>
               </tr>
             </thead>
             <tbody>
@@ -116,33 +142,70 @@ function Employee() {
                   <tr
                     className="text-center divide-y drop-shadow-md cursor-pointer truncate"
                     onClick={() => {
-                      navigate("/employee-detail");
+                      navigate(`/employee-detail/${item.employee_id}`);
                     }}
+                    key={item.employee_id}
                   >
                     <td>
-                      <input id={item.data.id} type="checkbox" className="relative appearance-none w-3 h-3 border border-solid border-black rounded accent-blue-500" />
+                      <input
+                        id={item.employee_id}
+                        type="checkbox"
+                        className="relative appearance-none w-3 h-3 border border-solid border-black rounded accent-blue-500"
+                      />
                     </td>
                     <td>
-                      <img src={Ellipse} className="rounded-full w-6 h-6 m-auto" alt="foto" />
+                      <img
+                        src={UserPhoto}
+                        className="rounded-full w-6 h-6 m-auto"
+                        alt="foto"
+                      />
                     </td>
-                    <td className="p-3 whitespace-nowrap">{item.data.name}</td>
-                    <td className="whitespace-nowrap">{item.data.employeeId}</td>
-                    <td className="whitespace-nowrap">{item.data.department}</td>
-                    <td className="whitespace-nowrap">{item.data.jobPosition}</td>
-                    <td className="whitespace-nowrap">{item.data.jobLevel}</td>
-                    <td className="whitespace-nowrap">{item.data.status}</td>
-                    <td className="whitespace-nowrap">{item.data.joinDate}</td>
-                    <td className="whitespace-nowrap">{item.data.endDate}</td>
-                    <td className="whitespace-nowrap">{item.data.resignDate}</td>
-                    <td className="whitespace-nowrap">{item.data.email}</td>
-                    <td className="whitespace-nowrap">{item.data.birthDate}</td>
-                    <td className="whitespace-nowrap">{item.data.placeOfBirth}</td>
-                    <td className="whitespace-nowrap">{item.data.age}</td>
-                    <td className="whitespace-nowrap truncate">{item.data.address}</td>
-                    <td className="whitespace-nowrap">{item.data.phoneNumber}</td>
-                    <td className="whitespace-nowrap">{item.data.gender}</td>
-                    <td className="whitespace-nowrap">{item.data.maritalStatus}</td>
-                    <td className="whitespace-nowrap">{item.data.religion}</td>
+                    <td className="p-3 whitespace-nowrap">
+                      {item.employee_relation.employee_fullname}
+                    </td>
+                    <td className="whitespace-nowrap">{item.employee_relation.employee_kode}</td>
+                    <td className="whitespace-nowrap">{!item.department_name ? "-" : item.department_name.department_name}</td>
+                    <td className="whitespace-nowrap">
+                      {!item.jobposition_name ? "-" : item.jobposition_name.job_position_name}
+                    </td>
+                    <td className="whitespace-nowrap">
+                      {!item.joblevel_name ? "-" : item.joblevel_name.job_level_name}
+                    </td>
+                    <td className="whitespace-nowrap">
+                      {!item.jobstatus_name ? "-" : item.jobstatus_name.job_status_name}
+                    </td>
+                    <td className="whitespace-nowrap">
+                      {!item.employment_joindate ? "-" : item.employment_joindate}
+                    </td>
+                    <td className="whitespace-nowrap">
+                      {!item.employment_enddate ? "-" : item.employment_enddate}
+                    </td>
+                    <td className="whitespace-nowrap">
+                      -
+                    </td>
+                    <td className="whitespace-nowrap">{item.employee_relation.email}</td>
+                    <td className="whitespace-nowrap">
+                    {item.employee_relation.employee_dob}
+                    </td>
+                    <td className="whitespace-nowrap">{item.employee_relation.employee_birth_place}</td>
+                    <td className="whitespace-nowrap">
+                      {calculateAge(item.employee_relation.employee_dob)}
+                    </td>
+                    <td className="whitespace-nowrap truncate">
+                      {item.employee_relation.employee_residential_addr}
+                    </td>
+                    <td className="whitespace-nowrap">
+                      {item.employee_relation.employee_phone_number}
+                    </td>
+                    <td className="whitespace-nowrap">
+                      {item.employee_relation.employee_gender}
+                    </td>
+                    <td className="whitespace-nowrap">
+                      {item.employee_relation.employee_maritual_status}
+                    </td>
+                    <td className="whitespace-nowrap">
+                      {item.employee_relation.employee_religion}
+                    </td>
                   </tr>
                 );
               })}

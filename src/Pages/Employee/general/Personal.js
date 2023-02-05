@@ -1,103 +1,199 @@
-import React, { Component } from "react";
+import axios from "axios";
+import React, { useState, useEffect } from "react";
+import { getToken } from "../../../Utils/Common";
+import EditPersonal from "../editEmployee/EditPersonal";
 
-export default class Personal extends Component {
-  render() {
-    return (
-      <div className="px-6 py-4 flex flex-col">
-        <div className="h-screen max-h-80 ">
-          <h1 className="text-base font-bold pb-6">Employment</h1>
+
+function Personal({ id }) {
+  const [datalist, setData] = useState([]);
+  const [edit, setEdit] = useState(true);
+  
+
+  useEffect(() => {
+    // console.log(id);
+    axios
+      .get(`http://people.api.zainzo.com/api/admin/employee/personal/${id}`, {
+        headers: {
+          Authorization: `Bearer ${getToken()}`,
+        },
+      })
+      .then((res) => setData(res.data.data[0]))
+      .catch((err) => console.log(err.message));
+  }, [id]);
+  // console.log(datalist);
+  return (
+    <>{
+      edit ? 
+      <div className="px-6 py-4 flex flex-col w-full">
+        <div className="h-auto">
+          <h1 className="text-lg font-bold mb-5">Personal</h1>
           <div className="grid grid-cols-2 gap-y-10 text-sm">
-            <label className="grid grid-cols-3 border border-x-0 border-t-0 border-b-1 mr-24  border-gray-divider">
+            <label
+              className={`grid grid-cols-3 border border-x-0 border-t-0 border-b-1 mr-8 border-gray-divider transition`}
+            >
               <span className="text-gray-disabledText">Full Name</span>
-              <input type="text" className="outline-none col-span-2" value={"Margaret Febiola"} />
+              <p className="outline-none col-span-2 mb-2">
+                {datalist.employee_fullname}
+              </p>
             </label>
-            <label className="grid grid-cols-3 border border-x-0 border-t-0 border-b-1 mr-24  border-gray-divider">
+            <label
+              className={`grid grid-cols-3 border border-x-0 border-t-0 border-b-1 mr-8  border-gray-divider transition`}
+            >
               <span className="text-gray-disabledText">Nick Name</span>
-              <input type="text" className="outline-none col-span-2" value={"Margaret"} />
+              <p className="outline-none col-span-2 mb-2">
+                {datalist.employee_nickname}
+              </p>
             </label>
-            <label className="grid grid-cols-3 border border-x-0 border-t-0 border-b-1 mr-24  border-gray-divider">
+            <label
+              className={`grid grid-cols-3 border border-x-0 border-t-0 border-b-1 mr-8 border-gray-divider transition`}
+            >
               <span className="text-gray-disabledText">Email</span>
-              <input type="text" className="outline-none col-span-2" value={"maragaretfebiola@gmail.com"} />
+              <p className="outline-none col-span-2 mb-2">{`${
+                !datalist.email ? "KOSONG" : datalist.email
+              }`}</p>
             </label>
-            <label className="grid grid-cols-3 border border-x-0 border-t-0 border-b-1 mr-24  border-gray-divider">
+            <label
+              className={`grid grid-cols-3 border border-x-0 border-t-0 border-b-1 mr-8 border-gray-divider transition`}
+            >
               <span className="text-gray-disabledText">Phone Number</span>
-              <input type="text" className="outline-none col-span-2" value={"085706611112"} />
+              <p className="outline-none col-span-2 mb-2">{`${datalist.employee_phone_number}`}</p>
             </label>
-            <label className="grid grid-cols-3 border border-x-0 border-t-0 border-b-1 mr-24  border-gray-divider">
+            <label
+              className={`grid grid-cols-3 border border-x-0 border-t-0 border-b-1 mr-8 border-gray-divider transition`}
+            >
               <span className="text-gray-disabledText">Place of Birth</span>
-              <input type="text" className="outline-none col-span-2" value={"Jakarta"} />
+              <p className="outline-none col-span-2 mb-2">{`${
+                !datalist.employee_birth_place
+                  ? "Kosong"
+                  : datalist.employee_birth_place
+              }`}</p>
             </label>
-            <label className="grid grid-cols-3 border border-x-0 border-t-0 border-b-1 mr-24  border-gray-divider">
+            <label
+              className={`grid grid-cols-3 border border-x-0 border-t-0 border-b-1 mr-8 border-gray-divider transition`}
+            >
               <span className="text-gray-disabledText">Birthdate</span>
-              <input type="date" className="outline-none col-span-2" value="1994-12-31" />
+              <p className="outline-none col-span-2 mb-2">{`${
+                !datalist.employee_dob ? "Kosong" : datalist.employee_dob
+              }`}</p>
             </label>
-            <label className="grid grid-cols-3 border border-x-0 border-t-0 border-b-1 mr-24  border-gray-divider">
+            <label
+              className={`grid grid-cols-3 border border-x-0 border-t-0 border-b-1 mr-8 border-gray-divider transition`}
+            >
               <span className="text-gray-disabledText">Gender</span>
-              <select type="text" className="outline-none col-span-2 bg-white">
-                <option value={"male"}>Male</option>
-                <option value={"female"}>Female</option>
-              </select>
+              <p className="outline-none col-span-2 mb-2">{`${
+                datalist.employee_gender == null ? 'Kosong' : datalist.employee_gender
+              }`}</p>
             </label>
-            <label className="grid grid-cols-3 border border-x-0 border-t-0 border-b-1 mr-24  border-gray-divider">
+            <label
+              className={`grid grid-cols-3 border border-x-0 border-t-0 border-b-1 mr-8 border-gray-divider transition`}
+            >
               <span className="text-gray-disabledText">Marital Status</span>
-              <select type="text" className="outline-none col-span-2 bg-white">
-                <option value={"single"}>Single</option>
-                <option value={"married"}>Married</option>
-              </select>
+              <p className="outline-none col-span-2 mb-2">{`${
+                !datalist.employee_maritual_status
+                  ? "Kosong"
+                  : datalist.employee_maritual_status
+              }`}</p>
             </label>
-            <label className="grid grid-cols-3 border border-x-0 border-t-0 border-b-1 mr-24  border-gray-divider">
+            <label
+              className={`grid grid-cols-3 border border-x-0 border-t-0 border-b-1 mr-8 border-gray-divider transition`}
+            >
               <span className="text-gray-disabledText">Blood Type</span>
-              <select type="text" className="outline-none col-span-2 bg-white">
-                <option value={"a"}>A</option>
-                <option value={"b"}>B</option>
-                <option value={"ab"}>AB</option>
-                <option value={"o"}>O</option>
-              </select>
+              <p className="outline-none col-span-2 mb-2">{`${
+                !datalist.employee_blood ? "Kosong" : datalist.employee_blood
+              }`}</p>
             </label>
-            <label className="grid grid-cols-3 border border-x-0 border-t-0 border-b-1 mr-24  border-gray-divider">
+            <label
+              className={`grid grid-cols-3 border border-x-0 border-t-0 border-b-1 mr-8 border-gray-divider transition`}
+            >
               <span className="text-gray-disabledText">Religion</span>
-              <select type="text" className="outline-none col-span-2 bg-white">
-                <option value={"islam"}>Islam</option>
-                <option value={"kristen"}>Kristen</option>
-                <option value={"katolik"}>Katolik</option>
-                <option value={"hindu"}>Hindu</option>
-                <option value={"budha"}>Budha</option>
-                <option value={"konghucu"}>Konghucu</option>
-              </select>
+              <p className="outline-none col-span-2 mb-2">{`${
+                !datalist.employee_religion
+                  ? "Kosong"
+                  : datalist.employee_religion
+              }`}</p>
             </label>
           </div>
-          <div></div>
         </div>
         <div className="">
           <h1 className="text-base font-bold pt-8 pb-6">Identity & Address</h1>
           <div className="grid grid-cols-2 gap-y-10 text-sm">
-            <label className="grid grid-cols-2 border border-x-0 border-t-0 border-b-1 mr-24  border-gray-divider">
+            <label
+              className={`grid grid-cols-3 border border-x-0 border-t-0 border-b-1 mr-8 border-gray-divider transition`}
+            >
               <span className="text-gray-disabledText">ID Type</span>
-              <input type="text" className="outline-none" value={"sdsd"} />
+              <p className="outline-none col-span-2 mb-2">{`${
+                !datalist.employee_id_type
+                  ? "Kosong"
+                  : datalist.employee_id_type
+              }`}</p>
             </label>
-            <label className="grid grid-cols-2 border border-x-0 border-t-0 border-b-1 mr-24  border-gray-divider">
+            <label
+              className={`grid grid-cols-3 border border-x-0 border-t-0 border-b-1 mr-8 border-gray-divider transition`}
+            >
               <span className="text-gray-disabledText">ID Number</span>
-              <input type="text" className="outline-none" value={"sds"} />
+              <p className="outline-none col-span-2 mb-2">{`${
+                !datalist.employee_id_number
+                  ? "Kosong"
+                  : datalist.employee_id_number
+              }`}</p>
             </label>
-            <label className="grid grid-cols-2 border border-x-0 border-t-0 border-b-1 mr-24  border-gray-divider">
+            <label
+              className={`grid grid-cols-3 border border-x-0 border-t-0 border-b-1 mr-8 border-gray-divider transition`}
+            >
               <span className="text-gray-disabledText">ID Expiration Date</span>
-              <input type="date" className="outline-none" value="2030-01-13" />
+              <p className="outline-none col-span-2 mb-2">{!datalist.employee_exp_date ? "Kosong" : datalist.employee_exp_date}</p>
             </label>
-            <label className="grid grid-cols-2 border border-x-0 border-t-0 border-b-1 mr-24  border-gray-divider">
+            <label
+              className={`grid grid-cols-3 border border-x-0 border-t-0 border-b-1 mr-8 border-gray-divider transition`}
+            >
               <span className="text-gray-disabledText">Portal Code</span>
-              <input type="text" className="outline-none" value={"98352"} />
+              <p className="outline-none col-span-2 mb-2">{`${
+                !datalist.employee_portal_code
+                  ? "Kosong"
+                  : datalist.employee_portal_code
+              }`}</p>
             </label>
-            <label className="grid grid-cols-2 border border-x-0 border-t-0 border-b-1 mr-24  border-gray-divider">
+            <label
+              className={`grid grid-cols-3 border border-x-0 border-t-0 border-b-1 mr-8 border-gray-divider transition`}
+            >
               <span className="text-gray-disabledText">Citizen ID Address</span>
-              <input type="text" className="outline-none" value={"dsd"} />
+              <p className="outline-none col-span-2 mb-2">{`${
+                !datalist.employee_id_address
+                  ? "Kosong"
+                  : datalist.employee_id_address
+              }`}</p>
             </label>
-            <label className="grid grid-cols-2 border border-x-0 border-t-0 border-b-1 mr-24  border-gray-divider">
-              <span className="text-gray-disabledText">Residential Address</span>
-              <input type="text" className="outline-none" value={"sdsd"} />
+            <label
+              className={`grid grid-cols-3 border border-x-0 border-t-0 border-b-1 mr-8 border-gray-divider transition`}
+            >
+              <span className="text-gray-disabledText">
+                Residential Address
+              </span>
+              <p className="outline-none col-span-2 mb-2">{`${
+                !datalist.employee_residential_addr
+                  ? "Kosong"
+                  : datalist.employee_residential_addr
+              }`}</p>
             </label>
           </div>
+          
         </div>
+
+      </div> : <EditPersonal id={id}/>
+    }
+      <div className="flex justify-end pr-24">
+        {
+          edit? 
+        <button
+          className="w-24 h-[38px] border-[2px] border-[#717171] rounded-full text-sm text-[#717171]"
+          onClick={() => setEdit(false)}
+        >
+          Edit
+        </button> : <></>
+        }
       </div>
-    );
-  }
+    </>
+  );
 }
+
+export default Personal;
