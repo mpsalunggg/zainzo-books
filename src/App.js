@@ -9,7 +9,7 @@ function App() {
   return (
     <>
       <BrowserRouter>
-        <div className="min-h-screen min-w-screen bg-gray-main dark:bg-soft-dark font-inter ">
+        <div className="min-h-screen min-w-screen bg-white dark:bg-soft-dark  ">
           <NavbarLayout>
             <div className="overflow-auto dark:text-white">
               {/* Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti tempore commodi numquam nisi ipsam nulla consequatur nemo voluptas totam ad excepturi repudiandae inventore nesciunt ut odit labore velit, est eum, cum nam.

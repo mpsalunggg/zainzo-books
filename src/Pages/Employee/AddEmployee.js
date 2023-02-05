@@ -12,7 +12,7 @@ export const PermanentContext = createContext();
 
 function AddEmployee() {
   const [pages, setPages] = useState(1);
-  const [permanent, setPermanent] = useState(false)
+  const [permanent, setPermanent] = useState(false);
   const [datalist, setDataList] = useState({
     employee_fullname: "",
     employee_nickname: "",
@@ -66,42 +66,31 @@ function AddEmployee() {
   // };
 
   return (
-<<<<<<< HEAD
-    <div>
-      <div className="py-10 px-10 bg-gray-main h-auto ml-24">
-        <div className="container mx-auto h-full drop-shadow-md bg-white rounded-xl p-3 overflow-auto divide-x">
-          {pages === 1 ? <AddPersonal setDone1={pages == 1 ? 1 : false} /> : pages === 2 ? <AddEmployement setDone2={pages == 2 ? 2 : false} /> : pages === 3 ? <AddPayroll setDone3={pages == 3 ? 3 : false} /> : <AddInvite />}
-          <section className="my-8 flex gap-4 justify-end">
-            <button className="w-24 h-8 border-2 border-gray-500 rounded-full text-sm text-gray-500" onClick={() => handleNext(pages - 1)}>
-              Cancel
-            </button>
-            <button className="w-24 h-8 bg-redColor rounded-full text-sm text-white" onClick={() => handleNext(pages + 1)}>
-              Next
-            </button>
-          </section>
-=======
+    // <div>
+    //   <div className="py-10 px-10 bg-gray-main h-auto ml-24">
+    //     <div className="container mx-auto h-full drop-shadow-md bg-white rounded-xl p-3 overflow-auto divide-x">
+    //       {pages === 1 ? <AddPersonal setDone1={pages == 1 ? 1 : false} /> : pages === 2 ? <AddEmployement setDone2={pages == 2 ? 2 : false} /> : pages === 3 ? <AddPayroll setDone3={pages == 3 ? 3 : false} /> : <AddInvite />}
+    //       <section className="my-8 flex gap-4 justify-end">
+    //         <button className="w-24 h-8 border-2 border-gray-500 rounded-full text-sm text-gray-500" onClick={() => handleNext(pages - 1)}>
+    //           Cancel
+    //         </button>
+    //         <button className="w-24 h-8 bg-redColor rounded-full text-sm text-white" onClick={() => handleNext(pages + 1)}>
+    //           Next
+    //         </button>
+    //       </section>
     <PageContext.Provider value={{ pages, setPages }}>
       <DataContext.Provider value={{ datalist, setDataList }}>
-        <PermanentContext.Provider value={{permanent, setPermanent}}>
-        <div>
-          {/* <Navbar /> */}
-          {/* <Sidebar /> */}
-          <div className="py-10 px-10 bg-gray-main h-auto ml-24">
-            <div className="container mx-auto h-full drop-shadow-md bg-white rounded-xl p-3 overflow-auto divide-x">
-              {pages === 1 ? (
-                <AddPersonal setDone1={pages == 1 ? 1 : false}/>
-              ) : pages === 2 ? (
-                <AddEmployement setDone2={pages == 2 ? 2 : false} />
-              ) : pages === 3 ? (
-                <AddPayroll setDone3={pages == 3 ? 3 : false} />
-              ) : (
-                <AddInvite />
-              )}
-              <section className="my-8 flex gap-4 justify-center"></section>
+        <PermanentContext.Provider value={{ permanent, setPermanent }}>
+          <div>
+            {/* <Navbar /> */}
+            {/* <Sidebar /> */}
+            <div className="py-10 px-10 bg-gray-main h-auto ml-24">
+              <div className="container mx-auto h-full drop-shadow-md bg-white rounded-xl p-3 overflow-auto divide-x">
+                {pages === 1 ? <AddPersonal setDone1={pages == 1 ? 1 : false} /> : pages === 2 ? <AddEmployement setDone2={pages == 2 ? 2 : false} /> : pages === 3 ? <AddPayroll setDone3={pages == 3 ? 3 : false} /> : <AddInvite />}
+                <section className="my-8 flex gap-4 justify-center"></section>
+              </div>
             </div>
           </div>
->>>>>>> e0288aba6d9c238da4c046f13bf5e98bd8bebd94
-        </div>
         </PermanentContext.Provider>
       </DataContext.Provider>
     </PageContext.Provider>
