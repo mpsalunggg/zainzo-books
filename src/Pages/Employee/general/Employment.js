@@ -39,7 +39,7 @@ function Employment({ id }) {
               >
                 <span className="text-gray-disabledText">Employee ID</span>
                 <p className="outline-none col-span-2 mb-2">
-                  {datalist.employee_kode}
+                  {!datalist.employee_relation ? "-" : datalist.employee_relation.employee_kode}
                 </p>
               </label>
               <label
@@ -47,7 +47,7 @@ function Employment({ id }) {
               >
                 <span className="text-gray-disabledText">Department</span>
                 <p className="outline-none col-span-2 mb-2">
-                  {!datalist.department_id ? "Kosong" : datalist.department_id}
+                  {!datalist.department_name ? "-" : datalist.department_name.department_name}
                 </p>
               </label>
               <label
@@ -55,9 +55,9 @@ function Employment({ id }) {
               >
                 <span className="text-gray-disabledText">Job Position</span>
                 <p className="outline-none col-span-2 mb-2">
-                  {!datalist.job_position_id
+                  {!datalist.jobposition_name
                     ? "Kosong"
-                    : datalist.job_position_id}
+                    : datalist.jobposition_name.job_position_name}
                 </p>
               </label>
               <label
@@ -65,9 +65,9 @@ function Employment({ id }) {
               >
                 <span className="text-gray-disabledText">Job Level</span>
                 <p className="outline-none col-span-2 mb-2">
-                  {!datalist.job_level_id
-                    ? "Kosong"
-                    : datalist.job_level_id}
+                  {!datalist.joblevel_name
+                    ? "-"
+                    : datalist.joblevel_name.job_level_name}
                 </p>
               </label>
               <label
@@ -75,9 +75,9 @@ function Employment({ id }) {
               >
                 <span className="text-gray-disabledText">Status</span>
                 <p className="outline-none col-span-2 mb-2">
-                  {!datalist.job_status_id
+                  {!datalist.jobstatus_name
                     ? "Kosong"
-                    : datalist.job_status_id}
+                    : datalist.jobstatus_name.job_status_name}
                 </p>
               </label>
               <label

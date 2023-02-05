@@ -23,14 +23,14 @@ function Employee() {
     return age;
   }
 
-  useEffect(()=>{
-    axios.get("https://people.api.zainzo.com/api/admin/department", {
-      headers: {
-        Authorization: `Bearer ${getToken()}`,
-      },
-    })
-    // .then(res => console.log(res))
-  },[])
+  // useEffect(()=>{
+  //   axios.get("https://people.api.zainzo.com/api/admin/department", {
+  //     headers: {
+  //       Authorization: `Bearer ${getToken()}`,
+  //     },
+  //   })
+  //   // .then(res => console.log(res))
+  // },[])
 
   useEffect(() => {
     axios
@@ -47,6 +47,10 @@ function Employee() {
   }, []);
 
   let navigate = useNavigate();
+  // console.log(dataList[0].department_name.department_name)
+  // dataList.forEach(item => {
+  //   console.log(item.department_name)
+  // })
 
   return (
     <div className="flex flex-col">
@@ -159,50 +163,50 @@ function Employee() {
                       />
                     </td>
                     <td className="p-3 whitespace-nowrap">
-                      {item.employee_fullname}
+                      {item.employee_relation.employee_fullname}
                     </td>
-                    <td className="whitespace-nowrap">{item.employee_kode}</td>
-                    <td className="whitespace-nowrap">{!item.department_id ? "Kosong" : item.department_id}</td>
+                    <td className="whitespace-nowrap">{item.employee_relation.employee_kode}</td>
+                    <td className="whitespace-nowrap">{!item.department_name ? "-" : item.department_name.department_name}</td>
                     <td className="whitespace-nowrap">
-                      {!item.job_position_id ? "Kosong" : item.job_position_id}
-                    </td>
-                    <td className="whitespace-nowrap">
-                      {!item.job_level_id ? "Kosong" : item.job_level_id}
+                      {!item.jobposition_name ? "-" : item.jobposition_name.job_position_name}
                     </td>
                     <td className="whitespace-nowrap">
-                      {!item.job_status_id ? "Kosong" : item.job_status_id}
+                      {!item.joblevel_name ? "-" : item.joblevel_name.job_level_name}
                     </td>
                     <td className="whitespace-nowrap">
-                      {!item.employment_joindate ? "Kosong" : item.employment_joindate}
+                      {!item.jobstatus_name ? "-" : item.jobstatus_name.job_status_name}
                     </td>
                     <td className="whitespace-nowrap">
-                      {!item.employment_enddate ? "Kosong" : item.employment_enddate}
+                      {!item.employment_joindate ? "-" : item.employment_joindate}
+                    </td>
+                    <td className="whitespace-nowrap">
+                      {!item.employment_enddate ? "-" : item.employment_enddate}
                     </td>
                     <td className="whitespace-nowrap">
                       -
                     </td>
-                    <td className="whitespace-nowrap">{item.email}</td>
+                    <td className="whitespace-nowrap">{item.employee_relation.email}</td>
                     <td className="whitespace-nowrap">
-                    {item.employee_dob}
+                    {item.employee_relation.employee_dob}
                     </td>
-                    <td className="whitespace-nowrap">{item.employee_birth_place}</td>
+                    <td className="whitespace-nowrap">{item.employee_relation.employee_birth_place}</td>
                     <td className="whitespace-nowrap">
-                      {calculateAge(item.employee_dob)}
+                      {calculateAge(item.employee_relation.employee_dob)}
                     </td>
                     <td className="whitespace-nowrap truncate">
-                      {item.employee_residential_addr}
+                      {item.employee_relation.employee_residential_addr}
                     </td>
                     <td className="whitespace-nowrap">
-                      {item.employee_phone_number}
+                      {item.employee_relation.employee_phone_number}
                     </td>
                     <td className="whitespace-nowrap">
-                      {item.employee_gender}
+                      {item.employee_relation.employee_gender}
                     </td>
                     <td className="whitespace-nowrap">
-                      {item.employee_maritual_status}
+                      {item.employee_relation.employee_maritual_status}
                     </td>
                     <td className="whitespace-nowrap">
-                      {item.employee_religion}
+                      {item.employee_relation.employee_religion}
                     </td>
                   </tr>
                 );
