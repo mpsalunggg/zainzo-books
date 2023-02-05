@@ -60,12 +60,10 @@ function Employee() {
   let navigate = useNavigate();
 
   return (
-    <div className="flex flex-col">
-      {/* <Navbar /> */}
-      <div className="p-8 bg-gray-main min-h-screen">
-        {/* <div className=" p-8 bg-blue-500 min-h-screen"> */}
-        <div className="mb-7 flex flex-row">
-          <h1 className="text-xl mr-auto font-normal">Employee</h1>
+    <div className="flex flex-col items-center mt-2">
+      <div className="container  h-screen overflow-auto">
+        <div className="mb-7 flex  flex-row">
+          <h1 className="text-2xl mr-auto self-center">Employee</h1>
           <button
             className="border border-gray-500 text-gray-500 rounded-full drop-shadow-2xl px-3 text-sm mr-2"
             onClick={() => {
@@ -84,7 +82,7 @@ function Employee() {
             Add Employee
           </button>
         </div>
-        <div className="container h-screen max-h-96 drop-shadow-md bg-white rounded-xl px-6 py-3 overflow-auto">
+        <div className="container max-w-6xl h-screen max-h-96 items-center self-center drop-shadow-md bg-white rounded-xl px-6 py-3 overflow-auto">
           <table className="table-auto">
             <thead>
               <tr className="text-center my-10 py-10">

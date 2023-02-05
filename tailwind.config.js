@@ -2,15 +2,17 @@
 module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
+    fontSize: {
+      xxs: "0.6rem",
+    },
     extend: {
+      fontFamily: {
+        poppins: ["Poppins", "sans-serif"],
+        inter: ["Inter", "sans-serif"],
+      },
       backgroundColor: {
         custom: "rgba(228, 228, 228, 0.5)",
         custom2: "rgba(113,113,113, 1)",
-        redColor: "rgba(209, 2, 52, 1)",
-      },
-      colors: {
-        custom: "rgba(113,113,113, 1)",
-        custom2: "rgba(82, 82, 82, 1)",
         redColor: "rgba(209, 2, 52, 1)",
       },
       width: {
@@ -24,6 +26,9 @@ module.exports = {
         custom2: "37rem",
       },
       colors: {
+        custom: "rgba(113,113,113, 1)",
+        custom2: "rgba(82, 82, 82, 1)",
+        redColor: "rgba(209, 2, 52, 1)",
         red: {
           main: "#D10234",
         },
@@ -32,11 +37,20 @@ module.exports = {
           disabledText: "#717171",
           divider: "#f4f4f4",
         },
+        "dark-blue-1": "#1a468d",
+        "dark-blue-2": "#2c5596",
+        "dark-1": "#05050b",
+        "soft-dark": "#1f2128",
+        "blue-1": "#e7eef8",
+        "neutral-1": "#c4cad3",
+        "border-red": "rgba(255, 255, 255, 0.15)",
+        "hover-sidebar": "rgba(255, 255, 255, 0.4)",
       },
       inset: {
         26: "100px",
       },
     },
   },
-  plugins: [],
+  plugins: [require("tailwind-scrollbar-hide")],
+  darkMode: "class",
 };

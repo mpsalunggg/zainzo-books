@@ -16,8 +16,8 @@ function Login() {
 
   const navigate = useNavigate();
 
-  const handleLogin = () => {
-    // event.preventDefault();
+  const handleLogin = (event) => {
+    event.preventDefault();
     setError(null);
     setLoading(true);
     if (email && password) {
@@ -30,12 +30,13 @@ function Login() {
           setLoading(false);
           setUserSession(res.data.token.original.access_token, res.data.user);
           navigate("/dashboard");
-          localStorage.setItem("token", res.data.token.original.access_token);
+          // localStorage.setItem("token", res.data.token.original.access_token);
+          console.log(res);
         })
         .catch((error) => {
           setLoading(false);
           if (error.response.status === 401) {
-            setError(error.response.data.error);
+            setError(error.response.data.Message);
           } else {
             setError("something went wrong. try again later");
           }
@@ -60,7 +61,7 @@ function Login() {
           <img src={ZainzoImg} className="w-28" />
         </div>
         <div>
-          <label for="first_name" className="block mb-2 text-sm font-medium text-gray-900 ">
+          <label htmlFor="first_name" className="block mb-2 text-sm font-medium text-gray-900 ">
             Email
           </label>
           <input
@@ -72,8 +73,9 @@ function Login() {
             required
           />
         </div>
+        {/* {error && <div className="text-red-600 text-sm">{error}</div>} */}
         <div>
-          <label for="Password" className="block mb-2 text-sm font-medium text-gray-900 ">
+          <label htmlFor="Password" className="block mb-2 text-sm font-medium text-gray-900 ">
             Password
           </label>
           <input

@@ -17,7 +17,6 @@ function Register() {
   const handleSubmit = () => {
     setError(null);
     setLoading(true);
-    // if (fullname && phoneNumber && email && password) {
     axios
       .post("http://people.api.zainzo.com/api/registerAdmin", {
         employee_fullname: fullname,
@@ -27,20 +26,20 @@ function Register() {
       })
       .then((res) => {
         setLoading(false);
-        setUserSession(res.data.token, res.data.user);
+        setUserSession(res.data.token.original.access_token, res.data);
+        navigate("/onboarding");
         console.log(res);
       })
       .catch((error) => {
         setLoading(false);
-        if (error.response.status === 401 || error.response.status === 400) {
-          setError(error.response.data.error);
-        } else {
-          setError("something went wrong. try again later");
-        }
+        // if (error.response.status === 401 || error.response.status === 400) {
+        setError(error.response.data.error);
+        // } else {
+        // setError("something went wrong. try again later");
+        // }
       });
-    getToken() ? navigate("/onboarding") : navigate("/");
     setPassword("");
-    // }
+    console.log(error);
   };
 
   return (
@@ -83,7 +82,7 @@ function Register() {
             onChange={(e) => setPhoneNumber(e.target.value)}
             required
           />
-          {error && <div className="text-red-600 text-sm">{error.employee_phone_number && error.employee_phone_number}</div>}
+          {error && <div className="text-red-600 text-sm">{error.employee_phone_number ? error.employee_phone_number : error}</div>}
         </div>
         <div>
           <label for="email" className="block mb-2 text-sm font-medium text-gray-900 ">
@@ -123,7 +122,7 @@ function Register() {
         </button>
         <p className="text-sm flex justify-center items-center">
           Sudah punya akun?{" "}
-          <Link to={"/login"} className="text-redColor">
+          <Link to={"/"} className="text-redColor">
             Masuk
           </Link>
         </p>

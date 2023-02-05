@@ -1,13 +1,11 @@
 import React, { useState } from "react";
 import fotoprofil from "../../Assets/fotoprofil.svg";
 import editicon from "../../Assets/editicon.svg";
-import { AiOutlineClockCircle } from "react-icons/ai";
-import { IoIosArrowForward } from "react-icons/io";
-import { RiUserLine } from "react-icons/ri";
 import Personal from "./general/Personal";
 import Employment from "./general/Employment";
-import Navbar from "../../Components/Navbar";
-import Sidebar from "../../Components/Sidebar";
+import arrowIcon from "../../Assets/arrow-right.svg";
+import userIcon from "../../Assets/user.svg";
+import clockIcon from "../../Assets/clock.svg";
 
 function DetailEmployee() {
   const [switchMenuIndex, setSwitchMenuIndex] = useState(0);
@@ -22,10 +20,10 @@ function DetailEmployee() {
         { title: "Education and Experience", viewIndex: 2 },
         { title: "Additional Info", viewIndex: 3 },
       ],
-      icon: RiUserLine,
+      icon: userIcon,
       menuOpen: false,
     },
-    { title: "Attendance", has_submenu: true, submenu: [], icon: AiOutlineClockCircle, menuOpen: false },
+    { title: "Attendance", has_submenu: true, submenu: [], icon: clockIcon, menuOpen: false },
   ]);
   const [subMenuView, setSubMenuView] = useState([{ view: () => Personal }, { view: () => Employment }]);
   const [ViewNow, setViewNow] = useState(() => Personal);
@@ -45,8 +43,10 @@ function DetailEmployee() {
 
   return (
     <div className="flex flex-col">
-      <div className="py-10 px-8 bg-gray-main min-h-screen">
+      <div className="py-10 px-4 min-h-screen">
+        {/* all container */}
         <div className="container mx-auto h-screen drop-shadow-md bg-white rounded-xl p-3 overflow-auto flex flex-row divide-x">
+          {/* sidebar kiri */}
           <div className="w-60 min-w-60 flex flex-col items-center">
             <div className="max-w-prose flex-none p-8 grid ">
               <img src={fotoprofil} alt="profil" className="mx-auto" />
@@ -68,10 +68,10 @@ function DetailEmployee() {
                       >
                         <span className="flex font-medium gap-x-2 items-center">
                           <span className="">
-                            <item.icon color="gray" />
+                            <img src={item.icon} alt="menuicon" />
                           </span>
                           <span className="flex-1">{item.title} </span>
-                          {item.has_submenu && <IoIosArrowForward color="#717171" className={` mt-1 mr-2 ${item.menuOpen ? "rotate-90 duration-200" : ""}`} />}
+                          {item.has_submenu && <img src={arrowIcon} alt="open menu" className={` mt-1 mr-2 ${item.menuOpen ? "rotate-90 duration-200" : ""}`} />}
                         </span>
                       </li>
                       <span className="whitespace-nowrap my-2">
@@ -102,6 +102,7 @@ function DetailEmployee() {
               </ul>
             </div>
           </div>
+          {/* component kanan */}
           <div className="">
             <ViewNow />
             {/* <button

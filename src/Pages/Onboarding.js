@@ -61,6 +61,7 @@ function Onboarding() {
   const [jabatanInput, setJabatanInput] = useState("");
   const [jumlahKaryawan, setJumlahKaryawan] = useState("");
   const [jenisIndustri, setJenisIndustri] = useState("");
+  const [error, setError] = useState(null);
 
   const navigate = useNavigate();
 
@@ -83,6 +84,7 @@ function Onboarding() {
           })
           .catch((error) => {
             console.log(error);
+            setError(error.response.data.message);
           });
       }
     }
@@ -176,6 +178,7 @@ function Onboarding() {
             })}
           </select>
         </div>
+        {error && <div className="text-red-600 text-sm">{error}</div>}
         <button type="button" onClick={handleSubmit} className="bg-redColor block w-full p-2.5 rounded-lg text-white text-center">
           Mulai
         </button>
