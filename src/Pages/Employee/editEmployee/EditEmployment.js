@@ -26,7 +26,7 @@ function EditEmployment({ id }) {
         console.log(res.data[0][0]);
         setData(res.data[0][0]);
         setDepartment(res.data[0][0].department_id);
-        setKode(res.data[0][0].employee_kode);
+        setKode(res.data[0][0].employee_relation.employee_kode);
         setJobPosition(res.data[0][0].job_position_id);
         setJobLovel(res.data[0][0].job_level_id);
         setStatus(res.data[0][0].job_status_id);
@@ -67,7 +67,7 @@ function EditEmployment({ id }) {
         // console.log(error.message)
       })
   };
-
+  console.log(datalist)
   const navigate = useNavigate();
 
   return (

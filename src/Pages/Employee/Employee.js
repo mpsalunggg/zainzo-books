@@ -39,16 +39,16 @@ function Employee() {
       .then((res) => {
         setDataList(res.data.employee);
         console.log(res);
-      });
-    // .catch(err => console.log(err.message))
+      })
+    .catch(err => console.log(err.message))
   }, []);
-
+  // console.log(dataList)
   let navigate = useNavigate();
   // console.log(dataList[0].department_name.department_name)
   // dataList.forEach(item => {
   //   console.log(item.department_name)
   // })
-
+  // console.log(getToken())
   return (
     <div className="flex flex-col items-center mt-2 mx-auto">
       <div className="container h-screen overflow-auto mx-auto flex flex-col">
